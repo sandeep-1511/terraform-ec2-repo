@@ -27,3 +27,8 @@ variable "ami_id" {
   description = "AMI for Amazon Ami2 Ec2 instance"
   default     = "ami-04bad3c587fe60d89"
 }
+
+variable "subnet_id" {
+  description = "AMI for Amazon Ami2 Ec2 instance"
+  default     = "prod-intra-subnets"
+}
