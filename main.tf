@@ -10,8 +10,8 @@ resource "aws_security_group" "my_security_group" {
   description = "security group for Ec2 instance"
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -42,6 +42,13 @@ resource "aws_instance" "myFirstInstance" {
   key_name = var.key_name
   instance_type = var.instance_type
   security_groups= [var.security_group]
+  user_data = <<-EOF
+          #! bin/bash
+          sudo yum -y install httpd
+          sudo systemctl start httpd
+          sudo systemctl enable httpd
+          echo "<h1>ecomm website will be launched by sandeep</h1>" >> /var/www/html/index.html
+  EOF
   tags= {
     Name = var.tag_name
   }
